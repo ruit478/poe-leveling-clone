@@ -1,0 +1,26 @@
+<div class="act-detail">
+  <div class="act-header">
+    <h2>Act {{ act().id }} — {{ act().name }}</h2>
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="actProgress().percent"></div>
+    </div>
+    <span class="progress-text">{{ actProgress().completed }} / {{ actProgress().total }} ({{ actProgress().percent }}%)</span>
+  </div>
+
+  <div class="zones">
+    @for (group of zoneGroups(); track group.zone) {
+      <div class="zone-group">
+        <div class="zone-header">{{ group.zone }}</div>
+        <div class="zone-steps">
+          @for (step of group.steps; track step.id) {
+            <app-step-item
+              [step]="step"
+              [checked]="progress.isChecked(step.id)"
+              (toggle)="progress.toggle(step.id)"
+            />
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

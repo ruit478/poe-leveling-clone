@@ -3,7 +3,31 @@
     "allow": [
       "Bash(npx @angular/cli version)",
       "Bash(ng new *)",
-      "Bash(git init *)"
+      "Bash(git init *)",
+      "WebFetch(domain:poe-leveling.com)",
+      "Bash(curl -sL 'https://poe-leveling.com/')",
+      "Bash(curl -sL 'https://api.poe-leveling.com/' -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -sL 'https://api.poe-leveling.com/api' -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -sL 'https://api.poe-leveling.com/ruins' -H \"Accept: application/json\")",
+      "Bash(curl -sL 'https://poe-leveling.com/_nuxt/8861767.js')",
+      "Bash(curl -sL 'https://poe-leveling.com/_nuxt/8e3298f.js')",
+      "Bash(curl -sL 'https://api.poe-leveling.com/ruins/1' -H \"Accept: application/json\")",
+      "Bash(curl -sL 'https://api.poe-leveling.com/ruins/1-normal' -H \"Accept: application/json\")",
+      "Bash(curl -sL 'https://api.poe-leveling.com/api/ruins' -H \"Accept: application/json\")",
+      "Bash(curl -sL 'https://poe-leveling.com/_nuxt/5475fc8.js')",
+      "Bash(curl -sL 'https://api.poe-leveling.com/v1/ruins' -H \"Accept: application/json\")",
+      "Bash(curl -sL 'https://poe-leveling.com/_nuxt/24f8528.js')",
+      "Bash(curl -sL 'https://poe-leveling.com/' -H 'User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8')",
+      "Bash(curl -sL 'https://poe-leveling.com/ruins/1-normal' -H 'User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36')",
+      "Bash(python3 -c \"import sys, json, html; data=sys.stdin.read\\(\\); print\\(data[:5000] if data else 'N/A'\\)\")",
+      "Bash(curl -sL 'https://poe-leveling.com/ruins/1-normal' -H 'User-Agent: Mozilla/5.0')",
+      "Bash(python3 -c \"import sys; d=sys.stdin.read\\(\\); print\\(d[:3000] if d else 'N/A'\\)\")",
+      "Bash(grep -oP '\\\\{[23]:\"[a-f0-9]+\",\"[4569]')",
+      "Bash(curl -sL 'https://api.poe-leveling.com/quests' -H \"Accept: application/json\")",
+      "Bash(curl -sL 'https://api.poe-leveling.com/gems' -H \"Accept: application/json\")",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 *)",
+      "WebSearch"
     ]
   }
 }

@@ -1,0 +1,25 @@
+<div class="act-list">
+  <h1 class="title">POE Leveling</h1>
+  <p class="subtitle">Path of Exile Campaign Guide</p>
+
+  <div class="acts">
+    @for (act of acts(); track act.id) {
+      <button
+        class="act-item"
+        [class.selected]="selectedActId() === act.id"
+        (click)="selectAct.emit(act.id)"
+      >
+        <div class="act-number">Act {{ act.id }}</div>
+        <div class="act-name">{{ act.name }}</div>
+        <div class="act-progress">
+          <div class="mini-bar">
+            <div class="mini-fill" [style.width.%]="progress.getProgress(act).percent"></div>
+          </div>
+          <span class="mini-text">{{ progress.getProgress(act).percent }}%</span>
+        </div>
+      </button>
+    }
+  </div>
+
+  <button class="reset-btn" (click)="progress.reset()">Reset All Progress</button>
+</div>

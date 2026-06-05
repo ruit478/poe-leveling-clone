@@ -1,0 +1,111 @@
+:host {
+  display: block;
+  width: 250px;
+  min-width: 250px;
+  background: #1a1a1e;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.title {
+  font-size: 20px;
+  margin: 0 0 2px 0;
+  color: #eee;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 11px;
+  color: #777;
+  margin: 0 0 20px 0;
+}
+
+.acts {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.act-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s;
+  color: #ccc;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  &.selected {
+    background: rgba(175, 96, 37, 0.12);
+    border-color: rgba(175, 96, 37, 0.4);
+
+    .act-number {
+      color: #af6025;
+    }
+  }
+}
+
+.act-number {
+  font-size: 13px;
+  font-weight: 600;
+  color: #bbb;
+}
+
+.act-name {
+  font-size: 11px;
+  color: #888;
+}
+
+.act-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mini-bar {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.mini-fill {
+  height: 100%;
+  background: #af6025;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.mini-text {
+  font-size: 10px;
+  color: #666;
+  min-width: 28px;
+  text-align: right;
+}
+
+.reset-btn {
+  margin-top: 24px;
+  width: 100%;
+  padding: 8px;
+  background: rgba(239, 83, 80, 0.12);
+  border: 1px solid rgba(239, 83, 80, 0.25);
+  color: #ef5350;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover {
+    background: rgba(239, 83, 80, 0.22);
+  }
+}
