@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx @angular/cli version)",
+      "Bash(ng new *)",
+      "Bash(git init *)"
+    ]
+  }
+}
