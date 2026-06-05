@@ -5,7 +5,6 @@ export interface Step {
   instruction: string;
   zone: string;
   type: StepType;
-  sideArea?: string;
 }
 
 export interface Act {
