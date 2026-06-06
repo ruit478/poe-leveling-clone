@@ -1,59 +1,112 @@
-# PoeLevelingClone
+# POE Leveling Clone
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.3.
+A step-by-step Path of Exile campaign leveling guide — check off instructions as you speed through all 10 acts.
 
-## Development server
+**Clone of [poe-leveling.com](https://poe-leveling.com/)** with persistence, progress tracking, and a dark POE-themed UI.
 
-To start a local development server, run:
-
-```bash
-ng serve
+```
+┌─────────────┐  ┌──────────────────────────────────────────────┐
+│  Act 1  12% │  │ Act 3 — The City of Sarn                    │
+│  Act 2   8% │  │ ████████████░░░░░░░░░░ 14 / 22 (64%)       │
+│  Act 3  64% │  │                                              │
+│  Act 4   0% │  │ THE SLUMS                                    │
+│  Act 5   0% │  │ ☐ Go north help Clarissa                    │
+│  ...        │  │                                              │
+│  Act 10  0% │  │ THE CREMATORIUM                              │
+│             │  │ ☑ Trial kill Piety pick up Tolman's …       │
+│             │  │ ☐ Talk to Clarissa for Sewer Keys           │
+│ [Reset All] │  │                                              │
+└─────────────┘  └──────────────────────────────────────────────┘
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Features
 
-## Code scaffolding
+- **All 10 acts** — the full Path of Exile campaign, zone by zone
+- **Step types** — waypoints, quests, bosses, trials, directions, rewards, notes — each color-coded
+- **Check as you go** — tap any step to mark it done, progress bars update in real-time
+- **Persistent progress** — checked steps survive page reloads (localStorage)
+- **Zone grouping** — steps grouped by zone for quick scanning
+- **Dark theme** — POE-inspired colors (`#121215` background, `#af6025` accent)
+- **Offline-first** — no backend, no API calls, all data is hardcoded
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## What's intentionally excluded
 
-```bash
-ng generate component component-name
-```
+- Gem recommendations
+- Build advice
+- Passive tree suggestions
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+This is purely a campaign routing tool — the original site's scope, preserved.
 
-```bash
-ng generate --help
-```
+## Tech stack
 
-## Building
+- **Framework:** Angular 20 (standalone components, no NgModules)
+- **Language:** TypeScript 5.8 (strict mode)
+- **Styling:** SCSS (hand-written, no UI library)
+- **State:** Signals + localStorage
+- **No routing** — single-page, act selection via signal
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Development
 
 ```bash
-ng test
+npm install
+npm start          # http://localhost:4200/
+npm run build      # production build → dist/
+npm test           # Karma + Jasmine
 ```
 
-## Running end-to-end tests
+## Architecture
 
-For end-to-end (e2e) testing, run:
+```
+AppComponent (root, two-column flex layout)
+├── ActList (left sidebar, 250px)
+│   ├── 10 act buttons with mini progress bars
+│   └── Reset All Progress button
+└── ActDetail (right panel, scrollable)
+    └── Steps grouped by zone → StepItem per instruction
 
-```bash
-ng e2e
+ProgressService (singleton, providedIn: 'root')
+  └── signal<Set<string>> ↔ localStorage
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+**Component communication:** `input()/output()` signals — no `@Input()`/`@Output()` decorators. Modern Angular API throughout.
 
-## Additional Resources
+## Data model
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```typescript
+type StepType = 'waypoint' | 'quest' | 'direction' | 'boss' | 'trial' | 'reward' | 'note';
+
+interface Step {
+  id: string;        // unique across all acts (e.g. 'a3-7')
+  instruction: string;
+  zone: string;
+  type: StepType;
+}
+
+interface Act {
+  id: number;        // 1–10
+  name: string;
+  steps: Step[];
+}
+```
+
+All leveling data lives in `src/app/data/acts.data.ts` — ~240 lines covering the entire campaign.
+
+## Project structure
+
+```
+src/app/
+├── app.ts                      # Root: holds ACTS, selectedActId signal
+├── app.html                    # Two-column flex layout
+├── app.scss                    # Dark theme host
+├── app.config.ts               # Providers (Router + zone config)
+├── models/
+│   └── leveling-data.ts        # Step, Act, StepType
+├── data/
+│   └── acts.data.ts            # All 10 acts with step-by-step instructions
+├── services/
+│   └── progress.service.ts     # Check state + localStorage persistence
+└── components/
+    ├── act-list/               # Sidebar with act buttons + progress mini-bars
+    ├── act-detail/             # Zone-grouped steps + progress bar
+    └── step-item/              # Checkable instruction row with type badge
+```
